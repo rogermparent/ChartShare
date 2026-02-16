@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { BookmarkState, BookmarkGroup } from "@/lib/types";
+import { BookmarkState, BookmarkGroup } from "../types";
 
 const STORAGE_KEY = "chartshare-bookmarks";
 

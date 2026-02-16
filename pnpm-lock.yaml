@@ -19,6 +19,9 @@ importers:
       better-sqlite3:
         specifier: ^12.6.2
         version: 12.6.2
+      chartshare-common:
+        specifier: workspace:*
+        version: link:../packages/chartshare-common
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(@types/better-sqlite3@7.6.13)(better-sqlite3@12.6.2)
@@ -95,6 +98,9 @@ importers:
       better-sqlite3:
         specifier: ^12.6.2
         version: 12.6.2
+      chartshare-common:
+        specifier: workspace:*
+        version: link:../packages/chartshare-common
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(@types/better-sqlite3@7.6.13)(better-sqlite3@12.6.2)
@@ -156,6 +162,34 @@ importers:
       typescript:
         specifier: ^5
         version: 5.9.3
+
+  packages/chartshare-common:
+    dependencies:
+      '@amcharts/amcharts5':
+        specifier: '>=5'
+        version: 5.15.6
+      better-sqlite3:
+        specifier: '>=12'
+        version: 12.6.2
+      drizzle-orm:
+        specifier: '>=0.45'
+        version: 0.45.1(@types/better-sqlite3@7.6.13)(better-sqlite3@12.6.2)
+      next:
+        specifier: '>=16'
+        version: 16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: '>=19'
+        version: 19.2.3
+      react-dom:
+        specifier: '>=19'
+        version: 19.2.3(react@19.2.3)
+    devDependencies:
+      '@types/better-sqlite3':
+        specifier: ^7.6.13
+        version: 7.6.13
+      '@types/react':
+        specifier: ^19
+        version: 19.2.14
 
 packages:
 

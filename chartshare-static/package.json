@@ -19,6 +19,7 @@
     "test:e2e": "TEST_MODE=true start-server-and-test start http://localhost:3000 cypress:run"
   },
   "dependencies": {
+    "chartshare-common": "workspace:*",
     "@amcharts/amcharts5": "^5.15.6",
     "@serwist/next": "^9.5.5",
     "better-sqlite3": "^12.6.2",

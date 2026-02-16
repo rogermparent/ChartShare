@@ -20,7 +20,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "chartshare-common/*": ["../packages/chartshare-common/*"]
     }
   },
   "include": [

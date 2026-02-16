@@ -1,0 +1,23 @@
+{
+  "name": "chartshare-common",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./components/*": "./components/*.tsx",
+    "./lib/*": "./lib/*.ts",
+    "./lib/hooks/*": "./lib/hooks/*.ts",
+    "./db/*": "./db/*.ts"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19",
+    "next": ">=16",
+    "@amcharts/amcharts5": ">=5",
+    "better-sqlite3": ">=12",
+    "drizzle-orm": ">=0.45"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/better-sqlite3": "^7.6.13"
+  }
+}

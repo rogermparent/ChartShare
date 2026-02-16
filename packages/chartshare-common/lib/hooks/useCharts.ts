@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { ChartRecord } from "@/lib/types";
+import { ChartRecord } from "../types";
 
 export function useCharts() {
   const [charts, setCharts] = useState<ChartRecord[]>([]);

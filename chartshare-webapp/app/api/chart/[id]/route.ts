@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getDb } from "@/db";
-import { charts } from "@/db/schema";
+import { getDb } from "chartshare-common/db/index";
+import { charts } from "chartshare-common/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function GET(

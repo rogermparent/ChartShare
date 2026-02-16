@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import Sidebar from "@/components/Sidebar";
-import BookmarkManager from "@/components/BookmarkManager";
-import { useCharts } from "@/lib/hooks/useCharts";
-import { useBookmarks } from "@/lib/hooks/useBookmarks";
-import { ChartRecord } from "@/lib/types";
+import Sidebar from "chartshare-common/components/Sidebar";
+import BookmarkManager from "chartshare-common/components/BookmarkManager";
+import { useCharts } from "chartshare-common/lib/hooks/useCharts";
+import { useBookmarks } from "chartshare-common/lib/hooks/useBookmarks";
+import { ChartRecord } from "chartshare-common/lib/types";
 
-const ChartRenderer = dynamic(() => import("@/components/ChartRenderer"), {
+const ChartRenderer = dynamic(() => import("chartshare-common/components/ChartRenderer"), {
   ssr: false,
 });
 

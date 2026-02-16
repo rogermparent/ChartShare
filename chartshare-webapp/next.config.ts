@@ -7,6 +7,8 @@ const withSerwist = withSerwistInit({
   additionalPrecacheEntries: [{ url: "/~offline", revision: crypto.randomUUID() }],
 });
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  transpilePackages: ["chartshare-common"],
+};
 
 export default withSerwist(nextConfig);

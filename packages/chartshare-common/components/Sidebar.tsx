@@ -1,13 +1,13 @@
 "use client";
 
-import { ChartRecord, BookmarkGroup } from "@/lib/types";
+import { ChartRecord, BookmarkGroup } from "../lib/types";
 
 interface SidebarProps {
   charts: ChartRecord[];
   loading: boolean;
   selectedId: number | null;
   onSelect: (chart: ChartRecord) => void;
-  onNew: () => void;
+  onNew?: () => void;
   bookmarkGroups: BookmarkGroup[];
   activeGroupId: string | null;
   onGroupChange: (groupId: string | null) => void;
@@ -25,13 +25,15 @@ export default function Sidebar({ charts, loading, selectedId, onSelect, onNew, 
     >
       <div className="flex items-center justify-between border-b border-gray-200 p-4">
         <h2 className="text-lg font-semibold">Charts</h2>
-        <button
-          data-testid="new-chart-btn"
-          onClick={onNew}
-          className="rounded bg-blue-600 px-3 py-2.5 text-sm text-white active:bg-blue-700 md:py-1.5 md:hover:bg-blue-700"
-        >
-          New
-        </button>
+        {onNew && (
+          <button
+            data-testid="new-chart-btn"
+            onClick={onNew}
+            className="rounded bg-blue-600 px-3 py-2.5 text-sm text-white active:bg-blue-700 md:py-1.5 md:hover:bg-blue-700"
+          >
+            New
+          </button>
+        )}
       </div>
 
       {bookmarkGroups.length > 0 && (

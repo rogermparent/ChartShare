@@ -7,3 +7,4 @@ onlyBuiltDependencies:
 packages:
   - ./chartshare-webapp
   - ./chartshare-static
+  - ./packages/*

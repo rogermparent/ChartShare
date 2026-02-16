@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
-import { ChartRecord } from "@/lib/types";
+import { ChartRecord } from "../lib/types";
 
 const ChartRenderer = dynamic(() => import("./ChartRenderer"), { ssr: false });
 

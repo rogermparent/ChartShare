@@ -11,6 +11,7 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   output: "export",
+  transpilePackages: ["chartshare-common"],
 };
 
 export default withSerwist(nextConfig);

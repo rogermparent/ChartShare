@@ -1,4 +1,4 @@
-import { closeDb, openDb } from "@/db";
+import { closeDb, openDb } from "chartshare-common/db/index";
 import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
