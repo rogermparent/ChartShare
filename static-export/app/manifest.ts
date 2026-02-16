@@ -4,7 +4,7 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AmCharts PWA",
+    name: "ChartShare",
     short_name: "AmCharts",
     description: "Chart management PWA powered by AmCharts 5",
     start_url: "/",

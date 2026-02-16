@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AmCharts PWA",
+  title: "ChartShare",
   description: "Chart management PWA powered by AmCharts 5",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "AmCharts PWA",
+    title: "ChartShare",
   },
 };
 
