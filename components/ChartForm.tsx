@@ -11,9 +11,10 @@ interface ChartFormProps {
   onSave: (name: string, description: string, chartData: string) => void;
   onCancel: () => void;
   onDelete?: () => void;
+  onBack?: () => void;
 }
 
-export default function ChartForm({ chart, onSave, onCancel, onDelete }: ChartFormProps) {
+export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }: ChartFormProps) {
   const [name, setName] = useState(chart?.name ?? "");
   const [description, setDescription] = useState(chart?.description ?? "");
   const [chartData, setChartData] = useState(chart?.chartData ?? "");
@@ -55,7 +56,18 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete }: ChartFo
 
   return (
     <div className="flex h-full flex-col" data-testid="chart-form">
-      <div className="border-b border-gray-200 p-4">
+      <div className="flex items-center gap-3 border-b border-gray-200 p-4">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="flex h-11 w-11 items-center justify-center rounded-lg active:bg-gray-100 md:hidden"
+            aria-label="Back"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+            </svg>
+          </button>
+        )}
         <h2 className="text-xl font-semibold">{chart ? "Edit Chart" : "New Chart"}</h2>
       </div>
 
@@ -67,7 +79,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete }: ChartFo
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            className="w-full rounded border border-gray-300 px-3 py-3 text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
             placeholder="Chart name"
           />
         </div>
@@ -79,7 +91,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete }: ChartFo
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            className="w-full rounded border border-gray-300 px-3 py-3 text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
             placeholder="Chart description (optional)"
           />
         </div>
@@ -90,7 +102,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete }: ChartFo
             data-testid="chart-data-input"
             value={chartData}
             onChange={(e) => setChartData(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-2 font-mono text-sm focus:border-blue-500 focus:outline-none"
+            className="w-full rounded border border-gray-300 px-3 py-3 font-mono text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
             rows={12}
             placeholder='{"type": "XYChart", ...}'
           />
@@ -104,26 +116,26 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete }: ChartFo
         {previewData.trim() && !jsonError && (
           <div className="mb-4">
             <label className="mb-1 block text-sm font-medium">Preview</label>
-            <div className="h-64 rounded border border-gray-200" data-testid="chart-preview">
+            <div className="h-48 rounded border border-gray-200 md:h-64" data-testid="chart-preview">
               <ChartRenderer chartData={previewData} id="chart-preview" />
             </div>
           </div>
         )}
       </div>
 
-      <div className="flex gap-2 border-t border-gray-200 p-4">
+      <div className="flex gap-2 border-t border-gray-200 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
         <button
           data-testid="save-chart-btn"
           onClick={() => onSave(name, description, chartData)}
           disabled={!isValid}
-          className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 rounded bg-blue-600 px-4 py-3 text-white active:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed md:flex-none md:py-2 md:hover:bg-blue-700"
         >
           Save
         </button>
         <button
           data-testid="cancel-btn"
           onClick={onCancel}
-          className="rounded border border-gray-300 px-4 py-2 hover:bg-gray-50"
+          className="flex-1 rounded border border-gray-300 px-4 py-3 active:bg-gray-100 md:flex-none md:py-2 md:hover:bg-gray-50"
         >
           Cancel
         </button>
@@ -131,7 +143,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete }: ChartFo
           <button
             data-testid="delete-chart-btn"
             onClick={onDelete}
-            className="ml-auto rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+            className="ml-auto rounded bg-red-600 px-4 py-3 text-white active:bg-red-700 md:py-2 md:hover:bg-red-700"
           >
             Delete
           </button>
