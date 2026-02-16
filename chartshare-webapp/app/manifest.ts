@@ -1,38 +1,10 @@
 import type { MetadataRoute } from "next";
+import { baseManifest } from "chartshare-common/lib/manifest";
 
 export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "ChartShare",
-    short_name: "AmCharts",
-    description: "Chart management PWA powered by AmCharts 5",
-    start_url: "/",
-    display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#2563eb",
-    icons: [
-      {
-        src: "/icon-192x192.png",
-        sizes: "192x192",
-        type: "image/png",
-      },
-      {
-        src: "/icon-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-    ],
-    screenshots: [
-      {
-        src: "/screenshot-mobile.png",
-        sizes: "1242x2688",
-      },
-      {
-        src: "/screenshot-desktop.png",
-        form_factor: "wide",
-        sizes: "2560x1600",
-      },
-    ],
+    ...baseManifest,
   };
 }

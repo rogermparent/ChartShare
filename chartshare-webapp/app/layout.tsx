@@ -1,5 +1,5 @@
-import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { RootLayout, layoutMetadata, layoutViewport } from "chartshare-common/lib/layout";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,33 +12,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "ChartShare",
-  description: "Chart management PWA powered by AmCharts 5",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "ChartShare",
-  },
-};
+export const metadata = layoutMetadata;
+export const viewport = layoutViewport;
 
-export const viewport: Viewport = {
-  themeColor: "#2563eb",
-  viewportFit: "cover",
-};
-
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <RootLayout fontClassName={`${geistSans.variable} ${geistMono.variable}`}>
+      {children}
+    </RootLayout>
   );
 }
