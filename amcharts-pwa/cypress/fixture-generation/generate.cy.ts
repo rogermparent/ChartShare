@@ -139,10 +139,12 @@ describe("Fixture Generation", () => {
       );
     });
 
-    // Create Legend chart
+    // Create Legend and Bullets chart
     cy.fixture("sampleLegendBulletsChart.json").then((legendChart) => {
       cy.get('[data-testid="new-chart-btn"]').click();
-      cy.get('[data-testid="chart-name-input"]').type("Chart with Legend");
+      cy.get('[data-testid="chart-name-input"]').type(
+        "Chart with Legend and Bullets",
+      );
       cy.get('[data-testid="chart-description-input"]').type(
         "Example with legend and bullets",
       );
@@ -155,14 +157,14 @@ describe("Fixture Generation", () => {
       cy.get('[data-testid="save-chart-btn"]').click();
       cy.get('[data-testid="chart-title"]').should(
         "contain",
-        "Chart with Legend",
+        "Chart with Legend and Bullets",
       );
     });
 
     // Create Axis chart
     cy.fixture("sampleAxisRangesChart.json").then((legendChart) => {
       cy.get('[data-testid="new-chart-btn"]').click();
-      cy.get('[data-testid="chart-name-input"]').type("Chart with Legend");
+      cy.get('[data-testid="chart-name-input"]').type("Chart with Axis Ranges");
       cy.get('[data-testid="chart-description-input"]').type(
         "Example with Axis Ranges",
       );
@@ -175,14 +177,16 @@ describe("Fixture Generation", () => {
       cy.get('[data-testid="save-chart-btn"]').click();
       cy.get('[data-testid="chart-title"]').should(
         "contain",
-        "Chart with Legend",
+        "Chart with Axis Ranges",
       );
     });
 
     // Create FillStroke chart
     cy.fixture("sampleFillStrokeChart.json").then((legendChart) => {
       cy.get('[data-testid="new-chart-btn"]').click();
-      cy.get('[data-testid="chart-name-input"]').type("Chart with Legend");
+      cy.get('[data-testid="chart-name-input"]').type(
+        "Chart with Fill and Stroke",
+      );
       cy.get('[data-testid="chart-description-input"]').type(
         "Example with Fill and Stroke defined",
       );
@@ -195,7 +199,7 @@ describe("Fixture Generation", () => {
       cy.get('[data-testid="save-chart-btn"]').click();
       cy.get('[data-testid="chart-title"]').should(
         "contain",
-        "Chart with Legend",
+        "Chart with Fill and Stroke",
       );
     });
 
