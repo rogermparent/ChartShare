@@ -7,7 +7,7 @@ interface SidebarProps {
   loading: boolean;
   selectedId: number | null;
   onSelect: (chart: ChartRecord) => void;
-  onNew: () => void;
+  onNew?: () => void;
   bookmarkGroups: BookmarkGroup[];
   activeGroupId: string | null;
   onGroupChange: (groupId: string | null) => void;
