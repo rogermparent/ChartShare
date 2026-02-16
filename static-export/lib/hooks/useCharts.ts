@@ -12,7 +12,6 @@ export function useCharts() {
     try {
       const res = await fetch("/api/charts");
       const data = await res.json();
-      console.log({ data });
       setCharts(data);
     } finally {
       setLoading(false);
@@ -42,7 +41,7 @@ export function useCharts() {
       id: number,
       data: Partial<Pick<ChartRecord, "name" | "description" | "chartData">>,
     ) => {
-      const res = await fetch(`/api/charts/${id}`, {
+      const res = await fetch(`/api/chart/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -56,7 +55,7 @@ export function useCharts() {
 
   const deleteChart = useCallback(
     async (id: number) => {
-      await fetch(`/api/charts/${id}`, { method: "DELETE" });
+      await fetch(`/api/chart/${id}`, { method: "DELETE" });
       await fetchCharts();
     },
     [fetchCharts],

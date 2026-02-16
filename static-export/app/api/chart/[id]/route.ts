@@ -14,7 +14,8 @@ export async function generateStaticParams() {
     console.warn("No charts found!");
     return [{ id: "_" }];
   }
-  return chartsResponse.map(({ id }) => ({ id: String(id) }));
+  const slugs = chartsResponse.map(({ id }) => ({ id: String(id) }));
+  return slugs;
 }
 
 export async function GET(
