@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { charts } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const chart = await db.select().from(charts).where(eq(charts.id, Number(id)));
+  const chart = await getDb().select().from(charts).where(eq(charts.id, Number(id)));
 
   if (chart.length === 0) {
     return NextResponse.json({ error: "Chart not found" }, { status: 404 });
@@ -24,7 +24,7 @@ export async function PUT(
   const { id } = await params;
   const body = await request.json();
 
-  const existing = await db.select().from(charts).where(eq(charts.id, Number(id)));
+  const existing = await getDb().select().from(charts).where(eq(charts.id, Number(id)));
   if (existing.length === 0) {
     return NextResponse.json({ error: "Chart not found" }, { status: 404 });
   }
@@ -42,7 +42,7 @@ export async function PUT(
   if (body.description !== undefined) updateData.description = body.description;
   if (body.chartData !== undefined) updateData.chartData = body.chartData;
 
-  const result = await db
+  const result = await getDb()
     .update(charts)
     .set(updateData)
     .where(eq(charts.id, Number(id)))
@@ -57,11 +57,11 @@ export async function DELETE(
 ) {
   const { id } = await params;
 
-  const existing = await db.select().from(charts).where(eq(charts.id, Number(id)));
+  const existing = await getDb().select().from(charts).where(eq(charts.id, Number(id)));
   if (existing.length === 0) {
     return NextResponse.json({ error: "Chart not found" }, { status: 404 });
   }
 
-  await db.delete(charts).where(eq(charts.id, Number(id)));
+  await getDb().delete(charts).where(eq(charts.id, Number(id)));
   return NextResponse.json({ success: true });
 }

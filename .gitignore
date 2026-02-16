@@ -46,9 +46,11 @@ public/swe-worker*
 
 # Database
 *.db
+# Keep fixtures in git so tests can run in CI
+!cypress/fixtures/databases/*.db
 
-# Drizzle migrations
-drizzle/
+# Drizzle migrations - keep in git for tests
+# drizzle/
 
 # Cypress artifacts
 cypress/videos
