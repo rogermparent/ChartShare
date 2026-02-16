@@ -75,7 +75,7 @@ describe("Bookmarks", () => {
     cy.findByRole("button", { name: "Add" }).click();
     cy.findByRole("dialog", { name: "Bookmark Groups" }).should("contain", "To Delete");
 
-    cy.findByRole("dialog", { name: "Bookmark Groups" }).contains("Delete").click();
+    cy.findByRole("dialog", { name: "Bookmark Groups" }).contains("button", "Delete").click();
     cy.findByRole("dialog", { name: "Bookmark Groups" }).should(
       "not.contain",
       "To Delete",
