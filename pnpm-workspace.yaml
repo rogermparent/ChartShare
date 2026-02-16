@@ -5,5 +5,5 @@ onlyBuiltDependencies:
   - sharp
   - unrs-resolver
 packages:
-  - ./amcharts-pwa
-  - ./static-export
+  - ./chartshare-webapp
+  - ./chartshare-static

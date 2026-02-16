@@ -1,12 +1,12 @@
 {
-  "name": "amcharts-pwa",
+  "name": "chartshare-static",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
     "dev:test": "TEST_MODE=true next dev --webpack",
     "build": "next build --webpack",
-    "start": "next start",
+    "start": "serve out -l 3001",
     "lint": "eslint",
     "db:load-fixture": "tsx scripts/load-fixture.ts",
     "db:push": "drizzle-kit push",
@@ -39,6 +39,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "fs-extra": "^11.3.3",
+    "serve": "^14.2.5",
     "serwist": "^9.5.5",
     "start-server-and-test": "^2.1.3",
     "tailwindcss": "^4",

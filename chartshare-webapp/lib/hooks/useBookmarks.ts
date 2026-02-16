@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { BookmarkState, BookmarkGroup } from "@/lib/types";
 
-const STORAGE_KEY = "amcharts-pwa-bookmarks";
+const STORAGE_KEY = "chartshare-bookmarks";
 
 function loadState(): BookmarkState {
   if (typeof window === "undefined") return { groups: [] };
