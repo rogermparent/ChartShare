@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# PWA service worker (generated)
+public/sw*
+public/swe-worker*
+
+# Database
+*.db
+
+# Drizzle migrations
+drizzle/
+
+# Cypress artifacts
+cypress/videos
+cypress/screenshots
+
+# SQLite Database files
+sqlite.db*
