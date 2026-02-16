@@ -11,7 +11,8 @@ export async function generateStaticParams() {
     .from(charts)
     .orderBy(desc(charts.updatedAt));
   if (!chartsResponse?.length) {
-    return [{ id: ["_"] }];
+    console.warn("No charts found!");
+    return [{ id: "_" }];
   }
   return chartsResponse.map(({ id }) => ({ id: String(id) }));
 }
