@@ -1,0 +1,162 @@
+{
+  "refs": [
+    {
+      "data": [
+        {
+          "year": "2021",
+          "europe": 2.5,
+          "namerica": 2.5
+        },
+        {
+          "year": "2022",
+          "europe": 2.6,
+          "namerica": 2.7
+        },
+        {
+          "year": "2023",
+          "europe": 2.8,
+          "namerica": 2.9
+        }
+      ]
+    },
+    {
+      "xAxis": {
+        "type": "CategoryAxis",
+        "settings": {
+          "categoryField": "year",
+          "renderer": {
+            "type": "AxisRendererX"
+          },
+          "tooltip": {
+            "type": "Tooltip"
+          }
+        },
+        "properties": {
+          "data": "#data"
+        }
+      },
+      "yAxis": {
+        "type": "ValueAxis",
+        "settings": {
+          "maxDeviation": 1,
+          "renderer": {
+            "type": "AxisRendererY",
+            "settings": {
+              "pan": "zoom"
+            }
+          }
+        }
+      }
+    },
+    {
+      "series": [
+        {
+          "type": "ColumnSeries",
+          "settings": {
+            "name": "Europe",
+            "categoryXField": "year",
+            "valueYField": "europe",
+            "xAxis": "#xAxis",
+            "yAxis": "#yAxis"
+          },
+          "properties": {
+            "data": "#data",
+            "bullets": [
+              {
+                "type": "Bullet",
+                "settings": {
+                  "locationY": 1,
+                  "sprite": {
+                    "type": "Label",
+                    "settings": {
+                      "centerX": {
+                        "type": "Percent",
+                        "value": 50
+                      },
+                      "centerY": {
+                        "type": "Percent",
+                        "value": 100
+                      },
+                      "text": "{valueY}",
+                      "populateText": true,
+                      "fill": "@series.get('fill')",
+                      "fontSize": 19,
+                      "fontWeight": "bold"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "ColumnSeries",
+          "settings": {
+            "name": "North America",
+            "categoryXField": "year",
+            "valueYField": "namerica",
+            "xAxis": "#xAxis",
+            "yAxis": "#yAxis"
+          },
+          "properties": {
+            "data": "#data",
+            "bullets": [
+              {
+                "type": "Bullet",
+                "settings": {
+                  "locationY": 1,
+                  "sprite": {
+                    "type": "Label",
+                    "settings": {
+                      "centerX": {
+                        "type": "Percent",
+                        "value": 50
+                      },
+                      "centerY": {
+                        "type": "Percent",
+                        "value": 100
+                      },
+                      "text": "{valueY}",
+                      "populateText": true,
+                      "fill": "@series.get('fill')",
+                      "fontSize": 19,
+                      "fontWeight": "bold"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "type": "XYChart",
+  "settings": {
+    "layout": "vertical"
+  },
+  "properties": {
+    "xAxes": ["#xAxis"],
+    "yAxes": ["#yAxis"],
+    "series": "#series"
+  },
+  "children": [
+    {
+      "type": "Legend",
+      "settings": {
+        "centerX": {
+          "type": "Percent",
+          "value": 50
+        },
+        "x": {
+          "type": "Percent",
+          "value": 50
+        },
+        "layout": "horizontal"
+      },
+      "properties": {
+        "data": "#series"
+      }
+    }
+  ]
+}

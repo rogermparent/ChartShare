@@ -1,0 +1,49 @@
+{
+  "name": "amcharts-pwa-static-export",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "dev:test": "TEST_MODE=true next dev --webpack",
+    "build": "next build --webpack",
+    "start": "serve out -l 3001",
+    "lint": "eslint",
+    "db:load-fixture": "tsx scripts/load-fixture.ts",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:fixtures": "cypress run --config specPattern='cypress/fixture-generation/**/*.cy.{js,jsx,ts,tsx}'",
+    "test:e2e": "TEST_MODE=true start-server-and-test start http://localhost:3000 cypress:run"
+  },
+  "dependencies": {
+    "@amcharts/amcharts5": "^5.15.6",
+    "@serwist/next": "^9.5.5",
+    "better-sqlite3": "^12.6.2",
+    "drizzle-orm": "^0.45.1",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "cypress": "^15.10.0",
+    "drizzle-kit": "^0.31.9",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "fs-extra": "^11.3.3",
+    "serve": "^14.2.5",
+    "serwist": "^9.5.5",
+    "start-server-and-test": "^2.1.3",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}
