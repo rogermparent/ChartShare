@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "AmCharts PWA",
@@ -19,6 +21,17 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/icon-512x512.png",
         sizes: "512x512",
         type: "image/png",
+      },
+    ],
+    screenshots: [
+      {
+        src: "/screenshot-mobile.png",
+        sizes: "1242x2688",
+      },
+      {
+        src: "/screenshot-desktop.png",
+        form_factor: "wide",
+        sizes: "2560x1600",
       },
     ],
   };

@@ -99,4 +99,107 @@ describe("Fixture Generation", () => {
     // Save the database
     cy.saveFixture("multiple-charts");
   });
+
+  it("generates all-charts.db fixture", () => {
+    cy.loadFixture("empty");
+    cy.visit("/");
+
+    // Create XY chart
+    cy.fixture("sampleXYChart.json").then((xyChart) => {
+      cy.get('[data-testid="new-chart-btn"]').click();
+      cy.get('[data-testid="chart-name-input"]').type("XY Line Chart");
+      cy.get('[data-testid="chart-description-input"]').type(
+        "Line chart with multiple series",
+      );
+      cy.get('[data-testid="chart-data-input"]').type(JSON.stringify(xyChart), {
+        parseSpecialCharSequences: false,
+        delay: 0,
+      });
+      cy.get('[data-testid="save-chart-btn"]').click();
+      cy.get('[data-testid="chart-title"]').should("contain", "XY Line Chart");
+    });
+
+    // Create Pie chart
+    cy.fixture("samplePieChart.json").then((pieChart) => {
+      cy.get('[data-testid="new-chart-btn"]').click();
+      cy.get('[data-testid="chart-name-input"]').type("Pie Distribution");
+      cy.get('[data-testid="chart-description-input"]').type(
+        "Distribution pie chart",
+      );
+      cy.get('[data-testid="chart-data-input"]')
+        .clear()
+        .type(JSON.stringify(pieChart), {
+          parseSpecialCharSequences: false,
+          delay: 0,
+        });
+      cy.get('[data-testid="save-chart-btn"]').click();
+      cy.get('[data-testid="chart-title"]').should(
+        "contain",
+        "Pie Distribution",
+      );
+    });
+
+    // Create Legend chart
+    cy.fixture("sampleLegendBulletsChart.json").then((legendChart) => {
+      cy.get('[data-testid="new-chart-btn"]').click();
+      cy.get('[data-testid="chart-name-input"]').type("Chart with Legend");
+      cy.get('[data-testid="chart-description-input"]').type(
+        "Example with legend and bullets",
+      );
+      cy.get('[data-testid="chart-data-input"]')
+        .clear()
+        .type(JSON.stringify(legendChart), {
+          parseSpecialCharSequences: false,
+          delay: 0,
+        });
+      cy.get('[data-testid="save-chart-btn"]').click();
+      cy.get('[data-testid="chart-title"]').should(
+        "contain",
+        "Chart with Legend",
+      );
+    });
+
+    // Create Axis chart
+    cy.fixture("sampleAxisRangesChart.json").then((legendChart) => {
+      cy.get('[data-testid="new-chart-btn"]').click();
+      cy.get('[data-testid="chart-name-input"]').type("Chart with Legend");
+      cy.get('[data-testid="chart-description-input"]').type(
+        "Example with Axis Ranges",
+      );
+      cy.get('[data-testid="chart-data-input"]')
+        .clear()
+        .type(JSON.stringify(legendChart), {
+          parseSpecialCharSequences: false,
+          delay: 0,
+        });
+      cy.get('[data-testid="save-chart-btn"]').click();
+      cy.get('[data-testid="chart-title"]').should(
+        "contain",
+        "Chart with Legend",
+      );
+    });
+
+    // Create FillStroke chart
+    cy.fixture("sampleFillStrokeChart.json").then((legendChart) => {
+      cy.get('[data-testid="new-chart-btn"]').click();
+      cy.get('[data-testid="chart-name-input"]').type("Chart with Legend");
+      cy.get('[data-testid="chart-description-input"]').type(
+        "Example with Fill and Stroke defined",
+      );
+      cy.get('[data-testid="chart-data-input"]')
+        .clear()
+        .type(JSON.stringify(legendChart), {
+          parseSpecialCharSequences: false,
+          delay: 0,
+        });
+      cy.get('[data-testid="save-chart-btn"]').click();
+      cy.get('[data-testid="chart-title"]').should(
+        "contain",
+        "Chart with Legend",
+      );
+    });
+
+    // Save the database
+    cy.saveFixture("all-charts");
+  });
 });
