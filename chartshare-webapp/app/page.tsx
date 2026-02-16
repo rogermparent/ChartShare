@@ -99,7 +99,6 @@ export default function Home() {
       {/* Main content: visible when mobileView != library on mobile, always visible on desktop */}
       <main
         className={`${mobileView !== "library" ? "flex" : "hidden"} min-w-0 flex-1 flex-col md:flex`}
-        data-testid="main-content"
       >
         {mode === "create" && (
           <ChartForm
@@ -133,11 +132,11 @@ export default function Home() {
                   </svg>
                 </button>
                 <div>
-                  <h1 className="text-xl font-semibold" data-testid="chart-title">
+                  <h1 className="text-xl font-semibold">
                     {selectedChart.name}
                   </h1>
                   {selectedChart.description && (
-                    <p className="text-sm text-gray-500" data-testid="chart-description">
+                    <p className="text-sm text-gray-500">
                       {selectedChart.description}
                     </p>
                   )}
@@ -156,7 +155,6 @@ export default function Home() {
                   importGroups={bookmarks.importGroups}
                 />
                 <button
-                  data-testid="edit-chart-btn"
                   onClick={handleEdit}
                   className="rounded border border-gray-300 px-3 py-1.5 text-sm active:bg-gray-100 md:hover:bg-gray-50"
                 >
@@ -164,14 +162,14 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <div className="flex-1" data-testid="chart-container">
+            <div className="flex-1" role="region" aria-label="Chart">
               <ChartRenderer chartData={selectedChart.chartData} id={`chart-${selectedChart.id}`} />
             </div>
           </div>
         )}
 
         {mode === "view" && !selectedChart && (
-          <div className="flex h-full items-center justify-center" data-testid="empty-state">
+          <div className="flex h-full items-center justify-center">
             <p className="text-gray-500">Select a chart or create a new one</p>
           </div>
         )}

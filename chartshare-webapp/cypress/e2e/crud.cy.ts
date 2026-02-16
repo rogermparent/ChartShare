@@ -2,20 +2,20 @@ describe("CRUD Operations", () => {
   it("shows empty state when no charts exist", () => {
     cy.resetDb();
     cy.visit("/");
-    cy.get('[data-testid="empty-state"]').should("be.visible");
-    cy.get('[data-testid="sidebar-empty"]').should("be.visible");
+    cy.findByText("Select a chart or create a new one").should("be.visible");
+    cy.findByText("No charts yet").should("be.visible");
   });
 
   it("creates a new chart", () => {
     cy.resetDb();
     cy.visit("/");
     cy.fixture("sampleXYChart.json").then((chartData) => {
-      cy.get('[data-testid="new-chart-btn"]').click();
-      cy.get('[data-testid="chart-form"]').should("be.visible");
+      cy.findByRole("button", { name: "New" }).click();
+      cy.findByRole("form").should("be.visible");
 
-      cy.get('[data-testid="chart-name-input"]').type("Test Chart");
-      cy.get('[data-testid="chart-description-input"]').type("A test chart");
-      cy.get('[data-testid="chart-data-input"]').type(
+      cy.findByLabelText("Name").type("Test Chart");
+      cy.findByLabelText("Description").type("A test chart");
+      cy.findByLabelText("Chart Data (JSON)").type(
         JSON.stringify(chartData),
         {
           parseSpecialCharSequences: false,
@@ -23,51 +23,51 @@ describe("CRUD Operations", () => {
         },
       );
 
-      cy.get('[data-testid="save-chart-btn"]').click();
-      cy.get('[data-testid="chart-title"]').should("contain", "Test Chart");
+      cy.findByRole("button", { name: "Save" }).click();
+      cy.findByRole("heading", { level: 1 }).should("contain", "Test Chart");
     });
   });
 
   it("displays created chart in sidebar", () => {
     cy.loadFixture("single-xy-chart");
     cy.visit("/");
-    cy.get('[data-testid="chart-list"]').should("be.visible");
-    cy.get('[data-testid="chart-list"]').should("contain", "Sample XY Chart");
+    cy.findByRole("complementary", { name: "Charts" }).findByRole("list").should("be.visible");
+    cy.findByRole("complementary", { name: "Charts" }).findByRole("list").should("contain", "Sample XY Chart");
   });
 
   it("selects and renders a chart", () => {
     cy.loadFixture("single-xy-chart");
     cy.visit("/");
     cy.contains("Sample XY Chart").click();
-    cy.get('[data-testid="chart-title"]').should("contain", "Sample XY Chart");
-    cy.get('[data-testid="chart-container"]').should("be.visible");
+    cy.findByRole("heading", { level: 1 }).should("contain", "Sample XY Chart");
+    cy.findByRole("region", { name: "Chart" }).should("be.visible");
   });
 
   it("updates a chart", () => {
     cy.loadFixture("single-xy-chart");
     cy.visit("/");
     cy.contains("Sample XY Chart").click();
-    cy.get('[data-testid="edit-chart-btn"]').click();
-    cy.get('[data-testid="chart-name-input"]').clear().type("Updated Name");
-    cy.get('[data-testid="save-chart-btn"]').click();
-    cy.get('[data-testid="chart-title"]').should("contain", "Updated Name");
+    cy.findByRole("button", { name: "Edit" }).click();
+    cy.findByLabelText("Name").clear().type("Updated Name");
+    cy.findByRole("button", { name: "Save" }).click();
+    cy.findByRole("heading", { level: 1 }).should("contain", "Updated Name");
   });
 
   it("deletes a chart", () => {
     cy.loadFixture("single-xy-chart");
     cy.visit("/");
     cy.contains("Sample XY Chart").click();
-    cy.get('[data-testid="edit-chart-btn"]').click();
-    cy.get('[data-testid="delete-chart-btn"]').click();
-    cy.get('[data-testid="empty-state"]').should("be.visible");
+    cy.findByRole("button", { name: "Edit" }).click();
+    cy.findByRole("button", { name: "Delete" }).click();
+    cy.findByText("Select a chart or create a new one").should("be.visible");
   });
 
   it("shows JSON validation error for invalid JSON", () => {
     cy.resetDb();
     cy.visit("/");
-    cy.get('[data-testid="new-chart-btn"]').click();
-    cy.get('[data-testid="chart-data-input"]').type("not valid json");
-    cy.get('[data-testid="json-error"]').should("be.visible");
-    cy.get('[data-testid="save-chart-btn"]').should("be.disabled");
+    cy.findByRole("button", { name: "New" }).click();
+    cy.findByLabelText("Chart Data (JSON)").type("not valid json");
+    cy.findByRole("alert").should("be.visible");
+    cy.findByRole("button", { name: "Save" }).should("be.disabled");
   });
 });

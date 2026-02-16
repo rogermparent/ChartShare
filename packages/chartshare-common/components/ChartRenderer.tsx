@@ -30,5 +30,5 @@ export default function ChartRenderer({ chartData, id }: ChartRendererProps) {
     };
   }, [chartData, id]);
 
-  return <div id={id} data-testid={`chart-${id}`} style={{ width: "100%", height: "100%" }} />;
+  return <div id={id} style={{ width: "100%", height: "100%" }} />;
 }

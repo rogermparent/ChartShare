@@ -55,7 +55,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
   const isValid = name.trim() !== "" && chartData.trim() !== "" && jsonError === null;
 
   return (
-    <div className="flex h-full flex-col" data-testid="chart-form">
+    <div className="flex h-full flex-col" role="form" aria-label={chart ? "Edit Chart" : "New Chart"}>
       <div className="flex items-center gap-3 border-b border-gray-200 p-4">
         {onBack && (
           <button
@@ -73,9 +73,9 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
 
       <div className="flex-1 overflow-y-auto p-4">
         <div className="mb-4">
-          <label className="mb-1 block text-sm font-medium">Name</label>
+          <label htmlFor="chart-name" className="mb-1 block text-sm font-medium">Name</label>
           <input
-            data-testid="chart-name-input"
+            id="chart-name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -85,9 +85,9 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
         </div>
 
         <div className="mb-4">
-          <label className="mb-1 block text-sm font-medium">Description</label>
+          <label htmlFor="chart-description" className="mb-1 block text-sm font-medium">Description</label>
           <input
-            data-testid="chart-description-input"
+            id="chart-description"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -97,9 +97,9 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
         </div>
 
         <div className="mb-4">
-          <label className="mb-1 block text-sm font-medium">Chart Data (JSON)</label>
+          <label htmlFor="chart-data" className="mb-1 block text-sm font-medium">Chart Data (JSON)</label>
           <textarea
-            data-testid="chart-data-input"
+            id="chart-data"
             value={chartData}
             onChange={(e) => setChartData(e.target.value)}
             className="w-full rounded border border-gray-300 px-3 py-3 font-mono text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
@@ -107,16 +107,16 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
             placeholder='{"type": "XYChart", ...}'
           />
           {jsonError && (
-            <p className="mt-1 text-sm text-red-600" data-testid="json-error">
+            <p className="mt-1 text-sm text-red-600" role="alert">
               Invalid JSON: {jsonError}
             </p>
           )}
         </div>
 
         {previewData.trim() && !jsonError && (
-          <div className="mb-4">
+          <div className="mb-4" role="region" aria-label="Preview">
             <label className="mb-1 block text-sm font-medium">Preview</label>
-            <div className="h-48 rounded border border-gray-200 md:h-64" data-testid="chart-preview">
+            <div className="h-48 rounded border border-gray-200 md:h-64">
               <ChartRenderer chartData={previewData} id="chart-preview" />
             </div>
           </div>
@@ -125,7 +125,6 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
 
       <div className="flex gap-2 border-t border-gray-200 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
         <button
-          data-testid="save-chart-btn"
           onClick={() => onSave(name, description, chartData)}
           disabled={!isValid}
           className="flex-1 rounded bg-blue-600 px-4 py-3 text-white active:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed md:flex-none md:py-2 md:hover:bg-blue-700"
@@ -133,7 +132,6 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
           Save
         </button>
         <button
-          data-testid="cancel-btn"
           onClick={onCancel}
           className="flex-1 rounded border border-gray-300 px-4 py-3 active:bg-gray-100 md:flex-none md:py-2 md:hover:bg-gray-50"
         >
@@ -141,7 +139,6 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
         </button>
         {chart && onDelete && (
           <button
-            data-testid="delete-chart-btn"
             onClick={onDelete}
             className="ml-auto rounded bg-red-600 px-4 py-3 text-white active:bg-red-700 md:py-2 md:hover:bg-red-700"
           >

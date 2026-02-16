@@ -1,3 +1,5 @@
+import "@testing-library/cypress/add-commands";
+
 const INVALIDATE_URL = "http://localhost:3000/api/test-invalidate-cache";
 
 declare global {

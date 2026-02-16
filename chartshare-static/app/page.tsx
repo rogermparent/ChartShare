@@ -55,7 +55,6 @@ export default function Home() {
       {/* Main content: visible when mobileView != library on mobile, always visible on desktop */}
       <main
         className={`${mobileView !== "library" ? "flex" : "hidden"} min-w-0 flex-1 flex-col md:flex`}
-        data-testid="main-content"
       >
         {mode === "view" && selectedChart && (
           <div className="flex h-full flex-col">
@@ -82,14 +81,12 @@ export default function Home() {
                 <div>
                   <h1
                     className="text-xl font-semibold"
-                    data-testid="chart-title"
                   >
                     {selectedChart.name}
                   </h1>
                   {selectedChart.description && (
                     <p
                       className="text-sm text-gray-500"
-                      data-testid="chart-description"
                     >
                       {selectedChart.description}
                     </p>
@@ -110,7 +107,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="flex-1" data-testid="chart-container">
+            <div className="flex-1" role="region" aria-label="Chart">
               <ChartRenderer
                 chartData={selectedChart.chartData}
                 id={`chart-${selectedChart.id}`}
@@ -122,7 +119,6 @@ export default function Home() {
         {mode === "view" && !selectedChart && (
           <div
             className="flex h-full items-center justify-center"
-            data-testid="empty-state"
           >
             <p className="text-gray-500">Select a chart</p>
           </div>

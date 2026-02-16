@@ -20,14 +20,13 @@ export default function Sidebar({ charts, loading, selectedId, onSelect, onNew, 
     : charts;
   return (
     <aside
-      data-testid="sidebar"
+      aria-label="Charts"
       className="flex h-full w-full flex-col bg-gray-50 md:h-screen md:w-72 md:border-r md:border-gray-200"
     >
       <div className="flex items-center justify-between border-b border-gray-200 p-4">
         <h2 className="text-lg font-semibold">Charts</h2>
         {onNew && (
           <button
-            data-testid="new-chart-btn"
             onClick={onNew}
             className="rounded bg-blue-600 px-3 py-2.5 text-sm text-white active:bg-blue-700 md:py-1.5 md:hover:bg-blue-700"
           >
@@ -38,37 +37,39 @@ export default function Sidebar({ charts, loading, selectedId, onSelect, onNew, 
 
       {bookmarkGroups.length > 0 && (
         <div className="border-b border-gray-200 px-4 py-2">
-          <select
-            data-testid="group-filter"
-            value={activeGroupId ?? ""}
-            onChange={(e) => onGroupChange(e.target.value || null)}
-            className="w-full rounded border border-gray-300 py-2.5 text-base md:py-1.5 md:text-sm"
-          >
-            <option value="">All Charts</option>
-            {bookmarkGroups.map((g) => (
-              <option key={g.id} value={g.id}>{g.name}</option>
-            ))}
-          </select>
+          <label>
+            <span className="sr-only">Filter by group</span>
+            <select
+              aria-label="Filter by group"
+              value={activeGroupId ?? ""}
+              onChange={(e) => onGroupChange(e.target.value || null)}
+              className="w-full rounded border border-gray-300 py-2.5 text-base md:py-1.5 md:text-sm"
+            >
+              <option value="">All Charts</option>
+              {bookmarkGroups.map((g) => (
+                <option key={g.id} value={g.id}>{g.name}</option>
+              ))}
+            </select>
+          </label>
         </div>
       )}
 
       <div className="flex-1 overflow-y-auto">
         {loading ? (
-          <p className="p-4 text-sm text-gray-500" data-testid="sidebar-loading">Loading...</p>
+          <p className="p-4 text-sm text-gray-500">Loading...</p>
         ) : filteredCharts.length === 0 ? (
-          <p className="p-4 text-sm text-gray-500" data-testid="sidebar-empty">{activeGroupId ? "No charts in this group" : "No charts yet"}</p>
+          <p className="p-4 text-sm text-gray-500">{activeGroupId ? "No charts in this group" : "No charts yet"}</p>
         ) : (
-          <ul data-testid="chart-list">
+          <ul>
             {filteredCharts.map((chart) => (
               <li
                 key={chart.id}
-                data-testid={`chart-item-${chart.id}`}
                 onClick={() => onSelect(chart)}
                 className={`cursor-pointer border-b border-gray-100 p-4 active:bg-gray-100 md:hover:bg-gray-100 ${
                   selectedId === chart.id ? "border-l-4 border-l-blue-600 bg-blue-50" : ""
                 }`}
               >
-                <p className="font-medium" data-testid={`chart-name-${chart.id}`}>{chart.name}</p>
+                <p className="font-medium">{chart.name}</p>
                 {chart.description && (
                   <p className="mt-1 text-sm text-gray-500 truncate">{chart.description}</p>
                 )}

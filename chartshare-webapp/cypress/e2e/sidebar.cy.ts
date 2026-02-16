@@ -6,8 +6,8 @@ describe("Sidebar", () => {
   it("displays multiple charts", () => {
     cy.loadFixture("multiple-charts");
     cy.visit("/");
-    cy.get('[data-testid="chart-list"]').should("be.visible");
-    cy.get('[data-testid="chart-list"] li').should("have.length", 3);
+    cy.findByRole("complementary", { name: "Charts" }).findByRole("list").should("be.visible");
+    cy.findByRole("complementary", { name: "Charts" }).findAllByRole("listitem").should("have.length", 3);
   });
 
   it("highlights the selected chart", () => {
@@ -26,9 +26,9 @@ describe("Sidebar", () => {
     cy.loadFixture("multiple-charts");
     cy.visit("/");
     cy.contains("Pie Distribution").click();
-    cy.get('[data-testid="chart-title"]').should("contain", "Pie Distribution");
+    cy.findByRole("heading", { level: 1 }).should("contain", "Pie Distribution");
 
     cy.contains("XY Line Chart").click();
-    cy.get('[data-testid="chart-title"]').should("contain", "XY Line Chart");
+    cy.findByRole("heading", { level: 1 }).should("contain", "XY Line Chart");
   });
 });

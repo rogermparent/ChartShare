@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export const baseManifest: MetadataRoute.Manifest = {
   name: "ChartShare",
-  short_name: "AmCharts",
+  short_name: "ChartShare",
   description: "Chart management PWA powered by AmCharts 5",
   start_url: "/",
   display: "standalone",

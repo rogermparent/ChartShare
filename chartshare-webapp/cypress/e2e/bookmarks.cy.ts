@@ -8,14 +8,14 @@ describe("Bookmarks", () => {
     cy.visit("/");
     cy.contains("Sample XY Chart").click();
 
-    cy.get('[data-testid="bookmark-btn"]').click();
-    cy.get('[data-testid="bookmark-dropdown"]').should("be.visible");
+    cy.findByRole("button", { name: "Bookmark" }).click();
+    cy.findByRole("dialog", { name: "Bookmark Groups" }).should("be.visible");
 
-    cy.get('[data-testid="new-group-input"]').type("Favorites");
-    cy.get('[data-testid="add-group-btn"]').click();
+    cy.findByLabelText("New group name").type("Favorites");
+    cy.findByRole("button", { name: "Add" }).click();
 
     // Chart should be auto-added to the new group
-    cy.get('[data-testid="bookmark-dropdown"]').should("contain", "Favorites");
+    cy.findByRole("dialog", { name: "Bookmark Groups" }).should("contain", "Favorites");
   });
 
   it("toggles chart membership in a group", () => {
@@ -23,22 +23,16 @@ describe("Bookmarks", () => {
     cy.visit("/");
     cy.contains("Sample XY Chart").click();
 
-    cy.get('[data-testid="bookmark-btn"]').click();
-    cy.get('[data-testid="new-group-input"]').type("Test Group");
-    cy.get('[data-testid="add-group-btn"]').click();
+    cy.findByRole("button", { name: "Bookmark" }).click();
+    cy.findByLabelText("New group name").type("Test Group");
+    cy.findByRole("button", { name: "Add" }).click();
 
     // The checkbox should be checked (auto-added)
-    cy.get('[data-testid="bookmark-dropdown"] input[type="checkbox"]')
-      .first()
-      .should("be.checked");
+    cy.findByRole("checkbox", { name: "Test Group" }).should("be.checked");
 
     // Uncheck to remove
-    cy.get('[data-testid="bookmark-dropdown"] input[type="checkbox"]')
-      .first()
-      .click();
-    cy.get('[data-testid="bookmark-dropdown"] input[type="checkbox"]')
-      .first()
-      .should("not.be.checked");
+    cy.findByRole("checkbox", { name: "Test Group" }).click();
+    cy.findByRole("checkbox", { name: "Test Group" }).should("not.be.checked");
   });
 
   it("exports and imports bookmarks", () => {
@@ -46,26 +40,26 @@ describe("Bookmarks", () => {
     cy.visit("/");
     cy.contains("Sample XY Chart").click();
 
-    cy.get('[data-testid="bookmark-btn"]').click();
-    cy.get('[data-testid="new-group-input"]').type("Export Group");
-    cy.get('[data-testid="add-group-btn"]').click();
+    cy.findByRole("button", { name: "Bookmark" }).click();
+    cy.findByLabelText("New group name").type("Export Group");
+    cy.findByRole("button", { name: "Add" }).click();
 
     // Export
-    cy.get('[data-testid="export-bookmarks-btn"]').click();
+    cy.findByRole("button", { name: "Export" }).click();
 
     // Import
-    cy.get('[data-testid="import-bookmarks-btn"]').click();
-    cy.get('[data-testid="import-textarea"]').should("be.visible");
+    cy.findByRole("button", { name: "Import" }).click();
+    cy.findByLabelText("Import data").should("be.visible");
 
     const importData = JSON.stringify({
       groups: [{ id: "test-id", name: "Imported Group", chartIds: [1] }],
     });
-    cy.get('[data-testid="import-textarea"]').type(importData, {
+    cy.findByLabelText("Import data").type(importData, {
       parseSpecialCharSequences: false,
       delay: 0,
     });
-    cy.get('[data-testid="confirm-import-btn"]').click();
-    cy.get('[data-testid="bookmark-dropdown"]').should(
+    cy.findByRole("button", { name: "Apply Import" }).click();
+    cy.findByRole("dialog", { name: "Bookmark Groups" }).should(
       "contain",
       "Imported Group",
     );
@@ -76,15 +70,13 @@ describe("Bookmarks", () => {
     cy.visit("/");
     cy.contains("Sample XY Chart").click();
 
-    cy.get('[data-testid="bookmark-btn"]').click();
-    cy.get('[data-testid="new-group-input"]').type("To Delete");
-    cy.get('[data-testid="add-group-btn"]').click();
-    cy.get('[data-testid="bookmark-dropdown"]').should("contain", "To Delete");
+    cy.findByRole("button", { name: "Bookmark" }).click();
+    cy.findByLabelText("New group name").type("To Delete");
+    cy.findByRole("button", { name: "Add" }).click();
+    cy.findByRole("dialog", { name: "Bookmark Groups" }).should("contain", "To Delete");
 
-    cy.get('[data-testid="bookmark-dropdown"] button')
-      .contains("Delete")
-      .click();
-    cy.get('[data-testid="bookmark-dropdown"]').should(
+    cy.findByRole("dialog", { name: "Bookmark Groups" }).contains("Delete").click();
+    cy.findByRole("dialog", { name: "Bookmark Groups" }).should(
       "not.contain",
       "To Delete",
     );
