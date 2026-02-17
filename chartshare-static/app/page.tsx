@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import dynamic from "next/dynamic";
 import Sidebar from "chartshare-common/components/Sidebar";
 import BookmarkManager from "chartshare-common/components/BookmarkManager";
 import { useCharts } from "chartshare-common/lib/hooks/useCharts";
 import { useBookmarks } from "chartshare-common/lib/hooks/useBookmarks";
+import { useChartUrlSync } from "chartshare-common/lib/hooks/useChartUrlSync";
 import { ChartRecord } from "chartshare-common/lib/types";
 
 const ChartRenderer = dynamic(() => import("chartshare-common/components/ChartRenderer"), {
@@ -16,6 +17,14 @@ type ViewMode = "view";
 type MobileView = "library" | "chart" | "form";
 
 export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
+  );
+}
+
+function HomeContent() {
   const { charts, loading } = useCharts();
   const bookmarks = useBookmarks();
 
@@ -28,7 +37,10 @@ export default function Home() {
     setSelectedChart(chart);
     setMode("view");
     setMobileView("chart");
+    setChartParam(chart.id);
   };
+
+  const { setChartParam } = useChartUrlSync(charts, loading, handleSelect);
 
   const handleBackToLibrary = () => {
     setMobileView("library");
