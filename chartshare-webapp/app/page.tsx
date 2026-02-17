@@ -135,11 +135,11 @@ function HomeContent() {
 
         {mode === "view" && selectedChart && (
           <div className="flex h-full flex-col">
-            <div className="flex items-center justify-between border-b border-gray-200 p-4">
+            <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-700 p-4">
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleBackToLibrary}
-                  className="flex h-11 w-11 items-center justify-center rounded-lg active:bg-gray-100 md:hidden"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg active:bg-sky-100 dark:active:bg-sky-900 md:hidden"
                   aria-label="Back to library"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -171,7 +171,7 @@ function HomeContent() {
                 />
                 <button
                   onClick={handleEdit}
-                  className="rounded border border-gray-300 px-3 py-1.5 text-sm active:bg-gray-100 md:hover:bg-gray-50"
+                  className="rounded border border-gray-300 dark:border-slate-600 px-3 py-1.5 text-sm active:bg-sky-100 dark:active:bg-sky-900 md:hover:bg-sky-50 md:dark:hover:bg-sky-950"
                 >
                   Edit
                 </button>

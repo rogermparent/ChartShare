@@ -13,22 +13,33 @@ interface SidebarProps {
   onGroupChange: (groupId: string | null) => void;
 }
 
-export default function Sidebar({ charts, loading, selectedId, onSelect, onNew, bookmarkGroups, activeGroupId, onGroupChange }: SidebarProps) {
-  const activeGroup = activeGroupId ? bookmarkGroups.find((g) => g.id === activeGroupId) : null;
+export default function Sidebar({
+  charts,
+  loading,
+  selectedId,
+  onSelect,
+  onNew,
+  bookmarkGroups,
+  activeGroupId,
+  onGroupChange,
+}: SidebarProps) {
+  const activeGroup = activeGroupId
+    ? bookmarkGroups.find((g) => g.id === activeGroupId)
+    : null;
   const filteredCharts = activeGroup
     ? charts.filter((c) => activeGroup.chartIds.includes(c.id))
     : charts;
   return (
     <aside
       aria-label="Charts"
-      className="flex h-full w-full flex-col bg-gray-50 md:h-screen md:w-72 md:border-r md:border-gray-200"
+      className="flex h-full w-full flex-col bg-cyan-50 dark:bg-cyan-950 md:h-screen md:w-72 md:border-r md:border-gray-200 dark:md:border-gray-700"
     >
-      <div className="flex items-center justify-between border-b border-gray-200 p-4">
+      <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-700 p-4">
         <h2 className="text-lg font-semibold">Charts</h2>
         {onNew && (
           <button
             onClick={onNew}
-            className="rounded bg-blue-600 px-3 py-2.5 text-sm text-white active:bg-blue-700 md:py-1.5 md:hover:bg-blue-700"
+            className="rounded bg-blue-600 px-3 py-2.5 text-sm text-white active:bg-blue-700 md:py-1.5 hover:bg-blue-700"
           >
             New
           </button>
@@ -36,18 +47,20 @@ export default function Sidebar({ charts, loading, selectedId, onSelect, onNew, 
       </div>
 
       {bookmarkGroups.length > 0 && (
-        <div className="border-b border-gray-200 px-4 py-2">
+        <div className="border-b border-gray-200 dark:border-slate-700 px-4 py-2">
           <label>
             <span className="sr-only">Filter by group</span>
             <select
               aria-label="Filter by group"
               value={activeGroupId ?? ""}
               onChange={(e) => onGroupChange(e.target.value || null)}
-              className="w-full rounded border border-gray-300 py-2.5 text-base md:py-1.5 md:text-sm"
+              className="w-full rounded border border-gray-300 dark:border-slate-600 py-2.5 text-base md:py-1.5 md:text-sm"
             >
               <option value="">All Charts</option>
               {bookmarkGroups.map((g) => (
-                <option key={g.id} value={g.id}>{g.name}</option>
+                <option key={g.id} value={g.id}>
+                  {g.name}
+                </option>
               ))}
             </select>
           </label>
@@ -58,20 +71,26 @@ export default function Sidebar({ charts, loading, selectedId, onSelect, onNew, 
         {loading ? (
           <p className="p-4 text-sm text-gray-500">Loading...</p>
         ) : filteredCharts.length === 0 ? (
-          <p className="p-4 text-sm text-gray-500">{activeGroupId ? "No charts in this group" : "No charts yet"}</p>
+          <p className="p-4 text-sm text-gray-500">
+            {activeGroupId ? "No charts in this group" : "No charts yet"}
+          </p>
         ) : (
           <ul>
             {filteredCharts.map((chart) => (
               <li
                 key={chart.id}
                 onClick={() => onSelect(chart)}
-                className={`cursor-pointer border-b border-gray-100 p-4 active:bg-gray-100 md:hover:bg-gray-100 ${
-                  selectedId === chart.id ? "border-l-4 border-l-blue-600 bg-blue-50" : ""
+                className={`transition-all cursor-pointer border-b border-gray-100 dark:border-slate-800 p-4 active:bg-cyan-100 dark:active:bg-cyan-900 hover:bg-cyan-100 dark:hover:bg-slate-800 ${
+                  selectedId === chart.id
+                    ? "border-l-4 border-l-blue-600 bg-blue-50 dark:bg-cyan-900"
+                    : ""
                 }`}
               >
                 <p className="font-medium">{chart.name}</p>
                 {chart.description && (
-                  <p className="mt-1 text-sm text-gray-500 truncate">{chart.description}</p>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 truncate">
+                    {chart.description}
+                  </p>
                 )}
               </li>
             ))}

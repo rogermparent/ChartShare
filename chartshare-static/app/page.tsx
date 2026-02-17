@@ -70,11 +70,11 @@ function HomeContent() {
       >
         {mode === "view" && selectedChart && (
           <div className="flex h-full flex-col">
-            <div className="flex items-center justify-between border-b border-gray-200 p-4">
+            <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-700 p-4">
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleBackToLibrary}
-                  className="flex h-11 w-11 items-center justify-center rounded-lg active:bg-gray-100 md:hidden"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg active:bg-sky-100 dark:active:bg-sky-900 md:hidden"
                   aria-label="Back to library"
                 >
                   <svg

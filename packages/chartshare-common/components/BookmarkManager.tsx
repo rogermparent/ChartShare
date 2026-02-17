@@ -101,7 +101,7 @@ export default function BookmarkManager({
           value={newGroupName}
           onChange={(e) => setNewGroupName(e.target.value)}
           placeholder="New group name"
-          className="flex-1 rounded border border-gray-300 px-2 py-2 text-base md:py-1 md:text-sm"
+          className="flex-1 rounded border border-gray-300 dark:border-slate-600 px-2 py-2 text-base md:py-1 md:text-sm"
           onKeyDown={(e) => e.key === "Enter" && handleCreateGroup()}
         />
         <button
@@ -112,16 +112,16 @@ export default function BookmarkManager({
         </button>
       </div>
 
-      <div className="flex gap-1 border-t border-gray-200 pt-2">
+      <div className="flex gap-1 border-t border-gray-200 dark:border-slate-700 pt-2">
         <button
           onClick={handleExport}
-          className="rounded border border-gray-300 px-2 py-1 text-xs active:bg-gray-100 md:hover:bg-gray-50"
+          className="rounded border border-gray-300 dark:border-slate-600 px-2 py-1 text-xs active:bg-sky-100 dark:active:bg-sky-900 md:hover:bg-sky-50 md:dark:hover:bg-sky-950"
         >
           Export
         </button>
         <button
           onClick={() => setShowImport(!showImport)}
-          className="rounded border border-gray-300 px-2 py-1 text-xs active:bg-gray-100 md:hover:bg-gray-50"
+          className="rounded border border-gray-300 dark:border-slate-600 px-2 py-1 text-xs active:bg-sky-100 dark:active:bg-sky-900 md:hover:bg-sky-50 md:dark:hover:bg-sky-950"
         >
           Import
         </button>
@@ -135,7 +135,7 @@ export default function BookmarkManager({
             value={importText}
             onChange={(e) => setImportText(e.target.value)}
             placeholder="Paste bookmark JSON here"
-            className="w-full rounded border border-gray-300 px-2 py-2 font-mono text-sm md:py-1 md:text-xs"
+            className="w-full rounded border border-gray-300 dark:border-slate-600 px-2 py-2 font-mono text-sm md:py-1 md:text-xs"
             rows={4}
           />
           {importError && (
@@ -156,7 +156,7 @@ export default function BookmarkManager({
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="rounded border border-gray-300 px-3 py-1.5 text-sm active:bg-gray-100 md:hover:bg-gray-50"
+        className="rounded border border-gray-300 dark:border-slate-600 px-3 py-1.5 text-sm active:bg-sky-100 dark:active:bg-sky-900 md:hover:bg-sky-50 md:dark:hover:bg-sky-950"
       >
         Bookmark
       </button>
@@ -172,12 +172,12 @@ export default function BookmarkManager({
           <div
             role="dialog"
             aria-label="Bookmark Groups"
-            className="fixed inset-x-0 bottom-0 z-20 max-h-[70vh] overflow-y-auto rounded-t-2xl bg-white p-4 shadow-lg md:absolute md:inset-auto md:right-0 md:top-full md:z-10 md:mt-1 md:w-72 md:max-h-none md:overflow-visible md:rounded md:border md:border-gray-200 md:p-3"
+            className="fixed inset-x-0 bottom-0 z-20 max-h-[70vh] overflow-y-auto rounded-t-2xl bg-white dark:bg-stone-950 p-4 shadow-lg md:absolute md:inset-auto md:right-0 md:top-full md:z-10 md:mt-1 md:w-72 md:max-h-none md:overflow-visible md:rounded md:border md:border-gray-200 dark:md:border-gray-700 dark:border-slate-700 md:p-3"
             style={{ animation: "slide-up 0.25s ease-out" }}
           >
             {/* Drag indicator - mobile only */}
             <div className="mb-3 flex justify-center md:hidden">
-              <div className="h-1 w-10 rounded-full bg-gray-300" />
+              <div className="h-1 w-10 rounded-full bg-sky-300" />
             </div>
             {dropdownContent}
             <div className="pb-[env(safe-area-inset-bottom)] md:pb-0" />

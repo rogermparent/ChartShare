@@ -56,11 +56,11 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
 
   return (
     <div className="flex h-full flex-col" role="form" aria-label={chart ? "Edit Chart" : "New Chart"}>
-      <div className="flex items-center gap-3 border-b border-gray-200 p-4">
+      <div className="flex items-center gap-3 border-b border-gray-200 dark:border-slate-700 p-4">
         {onBack && (
           <button
             onClick={onBack}
-            className="flex h-11 w-11 items-center justify-center rounded-lg active:bg-gray-100 md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-lg active:bg-sky-100 dark:active:bg-sky-900 md:hidden"
             aria-label="Back"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -79,7 +79,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-3 text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
+            className="w-full rounded border border-gray-300 dark:border-slate-600 px-3 py-3 text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
             placeholder="Chart name"
           />
         </div>
@@ -91,7 +91,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-3 text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
+            className="w-full rounded border border-gray-300 dark:border-slate-600 px-3 py-3 text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
             placeholder="Chart description (optional)"
           />
         </div>
@@ -102,7 +102,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
             id="chart-data"
             value={chartData}
             onChange={(e) => setChartData(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-3 font-mono text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
+            className="w-full rounded border border-gray-300 dark:border-slate-600 px-3 py-3 font-mono text-base focus:border-blue-500 focus:outline-none md:py-2 md:text-sm"
             rows={12}
             placeholder='{"type": "XYChart", ...}'
           />
@@ -116,14 +116,14 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
         {previewData.trim() && !jsonError && (
           <div className="mb-4" role="region" aria-label="Preview">
             <label className="mb-1 block text-sm font-medium">Preview</label>
-            <div className="h-48 rounded border border-gray-200 md:h-64">
+            <div className="h-48 rounded border border-gray-200 dark:border-slate-700 md:h-64">
               <ChartRenderer chartData={previewData} id="chart-preview" />
             </div>
           </div>
         )}
       </div>
 
-      <div className="flex gap-2 border-t border-gray-200 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+      <div className="flex gap-2 border-t border-gray-200 dark:border-slate-700 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
         <button
           onClick={() => onSave(name, description, chartData)}
           disabled={!isValid}
@@ -133,7 +133,7 @@ export default function ChartForm({ chart, onSave, onCancel, onDelete, onBack }:
         </button>
         <button
           onClick={onCancel}
-          className="flex-1 rounded border border-gray-300 px-4 py-3 active:bg-gray-100 md:flex-none md:py-2 md:hover:bg-gray-50"
+          className="flex-1 rounded border border-gray-300 dark:border-slate-600 px-4 py-3 active:bg-sky-100 dark:active:bg-sky-900 md:flex-none md:py-2 md:hover:bg-sky-50"
         >
           Cancel
         </button>

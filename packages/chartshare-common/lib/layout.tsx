@@ -24,7 +24,9 @@ export function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontClassName} antialiased`}>
+      <body
+        className={`${fontClassName} antialiased bg-slate-100 color-slate-950 dark:bg-slate-950 dark:color-slate-50`}
+      >
         {children}
       </body>
     </html>
